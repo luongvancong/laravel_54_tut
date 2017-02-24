@@ -1,14 +1,6 @@
-<html>
-    <head>
-        <title>App Name</title>
-    </head>
-    <body>
-        <h1>Header</h1>
+@include('partials/header')
 
-        <div class="container">
-            @yield('content')
-        </div>
+{{-- Noi dung trang web --}}
+@yield('content')
 
-        <footer>Footer</footer>
-    </body>
-</html>
+@include('partials/footer')

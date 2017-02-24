@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,14 @@ class CreateProductTable extends Migration
         Schema::create('products', function($table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->integer('price')->default(0);
+            $table->text('teaser')->nullable();
+            $table->text('content')->nullable();
+            $table->integer('price')->nullable();
+            $table->integer('promotion_price')->nullable();
+            $table->integer('category_id')->default(0);
+            $table->tinyInteger('hot')->default(0);
+            $table->tinyInteger('active')->default(1);
+            $table->timestamps();
         });
     }
 
