@@ -31,6 +31,27 @@ Route::group(['prefix' => '/admin', 'middleware' => ['check_login', 'check_admin
         Route::get('/{id}/hot', ['as' => 'admin.product.hot', 'uses' => 'Admin\ProductController@getHot']);
     });
 
+    // Categories
+    Route::group(['prefix' => 'category'], function() {
+        Route::get('/', ['as' => 'admin.category.index', 'uses' => 'Admin\CategoryController@getIndex']);
+
+        Route::get('/create', ['as' => 'admin.category.create', 'uses' => 'Admin\CategoryController@getCreate']);
+        Route::post('/create', 'Admin\CategoryController@postCreate');
+
+        Route::get('/{id}/edit', ['as' => 'admin.category.edit', 'uses' => 'Admin\CategoryController@getEdit']);
+        Route::post('/{id}/edit', 'Admin\CategoryController@postEdit');
+
+        Route::get('/{id}/delete', ['as' => 'admin.category.delete', 'uses' => 'Admin\CategoryController@getDelete']);
+
+        Route::get('/{id}/active', ['as' => 'admin.category.active', 'uses' => 'Admin\CategoryController@getActive']);
+    });
+
+    // Settings
+    Route::group(['prefix' => 'setting'], function() {
+        Route::get('/', ['as' => 'admin.setting.index', 'uses' => 'Admin\SettingController@getSetting']);
+        Route::post('/', 'Admin\SettingController@postSetting');
+    });
+
 });
 
 
@@ -41,5 +62,12 @@ Route::get('/chi-tiet-tin-tuc', ['as' => 'chi_tiet_tin_tuc', 'uses' => 'TinTucCo
 
 Route::get('/them-tin', ['as' => 'them_tin', 'uses' => 'TinTucController@getCreate']);
 Route::post('/them-tin', 'TinTucController@postCreate');
+
+// Gio hang
+Route::group(['prefix' => 'gio-hang'], function() {
+    Route::get('/', ['as' => 'cart.listing', 'uses' => 'CartController@getListing']);
+    Route::get('add/{id}', ['as' => 'cart.add', 'uses' => 'CartController@addProduct']);
+    Route::get('remove/{id}', ['as' => 'cart.remove', 'uses' => 'CartController@removeProduct']);
+});
 
 Auth::routes();

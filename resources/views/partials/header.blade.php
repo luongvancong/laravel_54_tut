@@ -54,7 +54,7 @@
                     <div class="quick-access">
                         <ul>
                             <li > <a rel="nofollow" title="View my exchange" href="/" class="cart-btn first-bg" > <i class="icon-exchange"></i> </a> </li>
-                            <li > <a rel="nofollow" title="View my shopping cart" href="/" class="cart-btn  first-bg" > <i class="icon-shopping-cart"></i> </a> <span><?php echo $countItemCart ?> - <?php echo formatCurrency($totalMoneyItemCart) ?> VNĐ</span> </li>
+                            <li > <a rel="nofollow" title="View my shopping cart" href="/" class="cart-btn  first-bg" > <i class="icon-shopping-cart"></i> </a> <span>{{ Cart::count() }} - {{ Cart::subtotal() }} VNĐ</span> </li>
                         </ul>
                     </div>
                     <form method="get" action="index.php?controller=search" id="searchbox">
@@ -66,7 +66,7 @@
                 <script src="/assets/js/jquery.dlmenu.js"></script>
                 <script>
                     $(function() {
-                    $( '#dl-menu' ).dlmenu();
+                    // $( '#dl-menu' ).dlmenu();
 
                     $(".sf-menu li.item").hover(
                        function () {
@@ -190,9 +190,9 @@
                         <li class="item">
                             <a class="parent" href="javascript:;">Sản phẩm</a>
                             <ul>
-                                <?php foreach($categories as $item): ?>
-                                <li><a href="/category.php?id=<?php echo $item['id'] ?>"><?php echo $item['name'] ?></a></li>
-                                <?php endforeach; ?>
+                                @foreach($GLB_Categories as $item)
+                                <li><a href="">{{ $item['name'] }}</a></li>
+                                @endforeach
                             </ul>
                         </li>
 

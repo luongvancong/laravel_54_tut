@@ -35,9 +35,9 @@
         <div class="category-list">
             <ul class="products-grid first ">
                 <?php foreach($categories as $key => $item): ?>
-                <li class="fadeIn animated <?php echo $key == $countCategories-1 ? 'last' : '' ?>">
+                <li class="fadeIn animated {{ $key == $countCategories-1 ? 'last' : '' }}">
                     <span class="overlay first-bg"> </span>
-                    <h3><a href="#"><?php echo $item['name'] ?></a></h3>
+                    <h3><a href="#">{{ $item['name'] }}</a></h3>
                     <a href="#"> <img src="/assets/media/cat.jpg" width="369" height="133"></a>
                 </li>
                 <?php endforeach; ?>
@@ -48,10 +48,10 @@
                 <h3 class="title-carousel first-brd">Sản phẩm nổi bật</h3>
             </div>
 
-            <ul class="products-grid first odd <?php echo count($hotProducts) > 4 ? 'bxslider' : '' ?>">
-                <?php foreach($hotProducts as $item): ?>
-                    <?php include ROOT_PATH . '/includes/inc_product_item.php' ?>
-                <?php endforeach; ?>
+            <ul class="products-grid first odd {{ count($hotProducts) > 4 ? 'bxslider' : '' }}">
+                @foreach($hotProducts as $item)
+                    @include('partials/product-item')
+                @endforeach
             </ul>
         </div>
         <div class="promo-home">
@@ -66,10 +66,10 @@
                 <h3 class="title-carousel first-brd">Sản phẩm mới</h3>
             </div>
 
-            <ul class="products-grid first odd <?php echo count($newestProducts) > 4 ? 'bxslider' : '' ?>">
-                <?php foreach($newestProducts as $item): ?>
-                    <?php include ROOT_PATH . '/includes/inc_product_item.php' ?>
-                <?php endforeach; ?>
+            <ul class="products-grid first odd {{ count($newestProducts) > 4 ? 'bxslider' : '' }}">
+                @foreach($newestProducts as $item)
+                    @include('partials/product-item')
+                @endforeach
             </ul>
         </div>
         <div class="width-carousel brand-carousel">

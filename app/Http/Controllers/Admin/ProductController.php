@@ -30,6 +30,7 @@ class ProductController extends Controller {
     public function getIndex()
     {
         $products = $this->product->getProducts(20);
+
         return view('admin/product/index', compact('products'));
     }
 
@@ -72,22 +73,33 @@ class ProductController extends Controller {
         $product->fill($data);
         $product->save();
 
-        return redirect()->route('admin.product.index')->with('success', 'Add product successfull');
+        return redirect()->route('admin.product.index')->with('success', 'Update product successfull');
     }
 
     public function getDelete($id)
     {
-        # code...
+        $product = $this->product->findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('admin.product.index')->with('success', 'Delete product successfull');
     }
 
 
     public function getActive($id)
     {
-        # code...
+        $product = $this->product->findOrFail($id);
+        $product->active = !$product->active;
+        $product->save();
+
+        return redirect()->route('admin.product.index')->with('success', 'Active product successfull');
     }
 
     public function getHot($id)
     {
-        # code...
+        $product = $this->product->findOrFail($id);
+        $product->hot = !$product->hot;
+        $product->save();
+
+        return redirect()->route('admin.product.index')->with('success', 'Active hot product successfull');
     }
 }

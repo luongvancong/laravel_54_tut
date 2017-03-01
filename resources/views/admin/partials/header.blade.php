@@ -30,10 +30,13 @@
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li><a href="">Setting</a></li>
-                        <li><a href="{{ route('admin.product.index') }}">Product Category</a></li>
-                        <li><a href=""><i class="fa fa-cubes"></i> Products</a></li>
+                        <li><a href="/admin"><i class="fa fa-cogs"></i> Dashboard</a></li>
+                        <li><a href="{{ route('admin.setting.index') }}">Setting</a></li>
+                        <li><a href="{{ route('admin.category.index') }}">Category</a></li>
+                        <li><a href="{{ route('admin.product.index') }}"><i class="fa fa-cubes"></i> Products</a></li>
                         <li><a href=""><i class="fa fa-database"></i> Orders</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-md-10">
+                    {{-- Notification --}}
+                    @include('admin/partials/notification')

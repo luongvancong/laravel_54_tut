@@ -29,6 +29,11 @@
                         '//www.tinymce.com/css/codepen.min.css'
                     ]
                 });
+
+
+                $('.btn-delete-action').on('click', function() {
+                    return confirm("Are you sure?");
+                });
             });
         </script>
     </body>

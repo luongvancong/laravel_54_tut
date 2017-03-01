@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends FrontendController
 {
 
     /**
@@ -19,9 +20,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(Category $category)
+    public function __construct(Category $category, Product $product)
     {
+        parent::__construct();
         $this->category = $category;
+        $this->product = $product;
     }
 
     /**
@@ -31,7 +34,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = $this->category->getCategories();
-        return view('home/index', compact('categories'));
+        $categories = $this->category->getCategories([], 3);
+        $countCategories = $categories->count();
+
+        $hotProducts = $this->product->getHotProducts();
+        $newestProducts = $this->product->getNewestProducts();
+
+        return view('home/index', compact('categories', 'countCategories', 'hotProducts', 'newestProducts'));
     }
 }

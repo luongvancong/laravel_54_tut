@@ -18,6 +18,7 @@
             <th>Quantity</th>
             <th>Category</th>
             <th>Hot</th>
+            <th>Active</th>
             <th width="30">Edit</th>
             <th width="30">Del</th>
         </thead>
@@ -29,12 +30,15 @@
                     <td>
                         <img src="/uploads/{{ $product['image'] }}" height="50" onerror="this.src='/assets/img/grey.gif'">
                     </td>
-                    <td>{{ $product['price'] }}</td>
-                    <td>{{ $product['quantity'] }}</td>
-                    <td>{{ $product['cat_name'] }}</td>
+                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->quantity }}</td>
+                    <td>{{ $product->category->name }}</td>
                     <td>
-                        <a href="hot.php?id={{ $product['id'] }}" class="btn btn-xs {{ $product['hot'] == 1 ? 'btn-primary' : 'btn-default' }}">{{ $product['hot'] == 1 ? 'Hot' : 'Normal' }}</a>
+                        <a href="{{ route('admin.product.hot', $product->id) }}" class="btn btn-xs {{ $product['hot'] == 1 ? 'btn-primary' : 'btn-default' }}">{{ $product['hot'] == 1 ? 'Hot' : 'Normal' }}</a>
                     </td>
+                    <th>
+                        <a href="{{ route('admin.product.active', $product->id) }}" class="btn btn-xs {{ $product['active'] == 1 ? 'btn-primary' : 'btn-default' }}">{{ $product['active'] == 1 ? 'Active' : 'Deactive' }}</a>
+                    </th>
                     <td>
                         {!! makeEditButton(route('admin.product.edit', $product->id)) !!}
                     </td>

@@ -8,11 +8,19 @@ use Illuminate\Support\Collection;
 
 class Category extends Model {
 
-    protected $table = 'product_categories';
+    protected $fillable = ['name', 'parent_id', 'teaser', 'content'];
 
-    public function getCategories()
+    public function getCategories(array $filter = array(), $take = 1000)
     {
-        $categories = Category::where('active', 1)->get()->toArray();
+        $query = Category::whereRaw(1);
+
+        $active = array_get($filter, 'active', -1);
+
+        if($active >= 0) {
+            $query->where('active', $active);
+        }
+
+        $categories = $query->take($take)->get()->toArray();
         $sort = new Sort($categories);
         $categoriesArray = $sort->getCategories();
 
@@ -24,5 +32,10 @@ class Category extends Model {
         }
 
         return $collection;
+    }
+
+    public function products()
+    {
+        return $this->hasMany('App\Models\Product');
     }
 }
