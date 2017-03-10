@@ -52,6 +52,15 @@ Route::group(['prefix' => '/admin', 'middleware' => ['check_login', 'check_admin
         Route::post('/', 'Admin\SettingController@postSetting');
     });
 
+    // Orders
+    Route::group(['prefix' => 'order'], function() {
+        Route::get('/', ['as' => 'admin.order.index', 'uses' => 'Admin\OrderController@getIndex']);
+
+        Route::get('/{id}/detail', ['as' => 'admin.order.detail', 'uses' => 'Admin\OrderController@getDetail']);
+
+        Route::get('/{id}/delete', ['as' => 'admin.order.delete', 'uses' => 'Admin\OrderController@getDelete']);
+    });
+
 });
 
 
@@ -63,11 +72,29 @@ Route::get('/chi-tiet-tin-tuc', ['as' => 'chi_tiet_tin_tuc', 'uses' => 'TinTucCo
 Route::get('/them-tin', ['as' => 'them_tin', 'uses' => 'TinTucController@getCreate']);
 Route::post('/them-tin', 'TinTucController@postCreate');
 
+// Danh mục sản phẩm
+Route::get('/category/{id}-{slug}', ['as' => 'category.index', 'uses' => 'ProductCategoryController@getIndex']);
+
+// Chi tiết sản phẩm
+Route::get('/san-pham/{id}-{slug}', ['as' => 'product.detail', 'uses' => 'ProductDetailController@getDetail']);
+
 // Gio hang
 Route::group(['prefix' => 'gio-hang'], function() {
     Route::get('/', ['as' => 'cart.listing', 'uses' => 'CartController@getListing']);
-    Route::get('add/{id}', ['as' => 'cart.add', 'uses' => 'CartController@addProduct']);
-    Route::get('remove/{id}', ['as' => 'cart.remove', 'uses' => 'CartController@removeProduct']);
+
+    // Xóa item khỏi giỏ hàng
+    Route::get('/remove-item/{rowId}', ['as' => 'cart.remove', 'uses' => 'CartController@removeItem']);
+
+    // Cập nhật giỏ hàng: thêm, sửa
+    Route::get('/update', 'CartController@update');
+    Route::post('/update', ['as' => 'cart.update', 'uses' => 'CartController@update']);
 });
+
+// Gửi đơn hàng
+Route::get('/gui-don-hang', ['as' => 'order', 'uses' => 'OrderController@getIndex']);
+Route::post('/gui-don-hang', 'OrderController@postIndex');
+
+// Cảm ơn vì đã mua hàng
+Route::get('/thanks', ['as' => 'thanks', 'uses' => 'ThankController@getIndex']);
 
 Auth::routes();

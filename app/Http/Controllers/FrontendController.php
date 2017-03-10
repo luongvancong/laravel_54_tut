@@ -12,6 +12,7 @@ class FrontendController extends Controller
     {
         $setting = Setting::where('id', 1)->first();
         $categories = app('App\Models\Category')->getCategories();
+        $this->categories = $categories;
         view()->share('glbSetting', $setting);
         view()->share('GLB_Categories', $categories);
     }

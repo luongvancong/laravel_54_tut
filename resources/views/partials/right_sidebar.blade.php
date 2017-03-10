@@ -7,7 +7,7 @@
             <ul class="tree dhtml">
                 <?php foreach($categories as $item): ?>
                 <li>
-                    <a href="/category.php?id=<?php echo $item['id']; ?>" title=""><?php echo $item['name']; ?></a>
+                    <a href="{{ route('category.index', [$item->id, removeTitle($item->name)]) }}" title="{{ $item->name }}">{{ $item['name'] }}</a>
                 </li>
                 <?php endforeach; ?>
             </ul>

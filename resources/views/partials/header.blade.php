@@ -43,7 +43,7 @@
             <div class="navbar navbar-static top-links first-bg" >
                 <div class="navbar-inner container_9">
                     <ul id="header_nav" class="nav pull-right">
-                        <li ><i class="icon-shopping-cart"></i> <a href="/cart_listing.php">Giỏ hàng</a></li>
+                        <li ><i class="icon-shopping-cart"></i> <a href="{{ route('cart.listing') }}">Giỏ hàng</a></li>
                     </ul>
                 </div>
             </div>
@@ -191,13 +191,13 @@
                             <a class="parent" href="javascript:;">Sản phẩm</a>
                             <ul>
                                 @foreach($GLB_Categories as $item)
-                                <li><a href="">{{ $item['name'] }}</a></li>
+                                <li><a href="{{ route('category.index', [$item->id, removeTitle($item->name)]) }}">{{ $item['name'] }}</a></li>
                                 @endforeach
                             </ul>
                         </li>
 
-                        <li class="item"><a class="parent"  href="/cart_listing.php">Giỏ hàng</a></li>
-                        <li class="item"><a class="parent" href="/post.php">Tin tức</a>
+                        <li class="item"><a class="parent"  href="{{ route('cart.listing') }}">Giỏ hàng</a></li>
+                        <li class="item"><a class="parent" href="">Tin tức</a>
                         </li>
                     </ul>
                 </nav>

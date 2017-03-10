@@ -9,7 +9,7 @@
         <a href="{{ route('admin.product.index') }}" class="btn btn-lg btn-success"><i class="fa fa-database"></i> Products</a>
         <a href="{{ route('admin.category.index') }}" class="btn btn-lg btn-default"><i class="fa fa-database"></i> Category</a>
         <a href="" class="btn btn-lg btn-default"><i class="fa fa-leaf"></i> Posts</a>
-        <a href="" class="btn btn-lg btn-default"><i class="fa fa-database"></i> Orders</a>
+        <a href="{{ route('admin.order.index') }}" class="btn btn-lg btn-default"><i class="fa fa-database"></i> Orders</a>
     </div>
 </div>
 @stop

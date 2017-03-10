@@ -123,3 +123,70 @@ function makeActiveButton($link, $currentActiveValue) {
 function formatCurrency($number) {
     return number_format($number, 0, '.', '.');
 }
+
+
+/**
+ * Tao chu khong dau & thay the dau cach bang dau -
+ * @param  string $string
+ * @param  string $keyReplace
+ * @return string
+ */
+function removeTitle($string, $keyReplace = "/"){
+    $string = removeAccent($string);
+    $string =  trim(preg_replace("/[^A-Za-z0-9]/i"," ",$string)); // khong dau
+    $string =  str_replace(" ","-",$string);
+    $string = str_replace("--","-",$string);
+    $string = str_replace("--","-",$string);
+    $string = str_replace("--","-",$string);
+    $string = str_replace("--","-",$string);
+    $string = str_replace("--","-",$string);
+    $string = str_replace("--","-",$string);
+    $string = str_replace("--","-",$string);
+    $string = str_replace($keyReplace,"-",$string);
+    return strtolower($string);
+}
+
+/**
+ * Remove tieng viet thanh khong dau
+ * @param  string $string
+ * @return string
+ */
+function removeAccent($string) {
+    $marTViet = array(
+    // Chữ thường
+    "à","á","ạ","ả","ã","â","ầ","ấ","ậ","ẩ","ẫ","ă","ằ","ắ","ặ","ẳ","ẵ",
+    "è","é","ẹ","ẻ","ẽ","ê","ề","ế","ệ","ể","ễ",
+    "ì","í","ị","ỉ","ĩ",
+    "ò","ó","ọ","ỏ","õ","ô","ồ","ố","ộ","ổ","ỗ","ơ","ờ","ớ","ợ","ở","ỡ",
+    "ù","ú","ụ","ủ","ũ","ư","ừ","ứ","ự","ử","ữ",
+    "ỳ","ý","ỵ","ỷ","ỹ",
+    "đ","Đ","'",
+    // Chữ hoa
+    "À","Á","Ạ","Ả","Ã","Â","Ầ","Ấ","Ậ","Ẩ","Ẫ","Ă","Ằ","Ắ","Ặ","Ẳ","Ẵ",
+    "È","É","Ẹ","Ẻ","Ẽ","Ê","Ề","Ế","Ệ","Ể","Ễ",
+    "Ì","Í","Ị","Ỉ","Ĩ",
+    "Ò","Ó","Ọ","Ỏ","Õ","Ô","Ồ","Ố","Ộ","Ổ","Ỗ","Ơ","Ờ","Ớ","Ợ","Ở","Ỡ",
+    "Ù","Ú","Ụ","Ủ","Ũ","Ư","Ừ","Ứ","Ự","Ử","Ữ",
+    "Ỳ","Ý","Ỵ","Ỷ","Ỹ",
+    "Đ","Đ","'",
+    );
+    $marKoDau=array(
+        /// Chữ thường
+        "a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a","a",
+        "e","e","e","e","e","e","e","e","e","e","e",
+        "i","i","i","i","i",
+        "o","o","o","o","o","o","o","o","o","o","o","o","o","o","o","o","o",
+        "u","u","u","u","u","u","u","u","u","u","u",
+        "y","y","y","y","y",
+        "d","D","",
+        //Chữ hoa
+        "A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A",
+        "E","E","E","E","E","E","E","E","E","E","E",
+        "I","I","I","I","I",
+        "O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O",
+        "U","U","U","U","U","U","U","U","U","U","U",
+        "Y","Y","Y","Y","Y",
+        "D","D","",
+        );
+    return str_replace($marTViet, $marKoDau, $string);
+}

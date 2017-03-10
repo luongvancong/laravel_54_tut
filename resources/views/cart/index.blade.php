@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="cart-listing">
-
+    @if($cartItems->count())
         <table class="table table-hover table-stripped">
             <thead>
                 <th>Sản phẩm</th>
@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                 @foreach($cartItems as $item)
-                    <form method="GET" action="/cart.php">
+                    <form method="POST" action="{{ route('cart.update') }}">
 
                         <tr>
                             <td>{{ $item->name }}</td>
@@ -24,10 +24,14 @@
                             <td>{{ formatCurrency($item->price) }}</td>
                             <td>{{ formatCurrency($item->price * $item->qty) }}</td>
                             <td>
-                                <a href="/cart.php?action=remove&product_id={{ $item->id }}&return_url={{ $_SERVER['REQUEST_URI'] }}" class="btn btn-sm btn-danger">Xóa</a>
+                                <a href="{{ route('cart.remove', $item->rowId) }}" class="btn btn-sm btn-danger">Xóa</a>
                                 <input type="hidden" name="return_url" value="{{ $_SERVER['REQUEST_URI'] }}">
                                 <input type="hidden" name="action" value="update">
                                 <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                <input type="hidden" name="rowId" value="{{ $item->rowId }}">
+                                <input type="hidden" name="product_name" value="{{ $item->name }}">
+                                <input type="hidden" name="price" value="{{ $item->price }}">
+                                {!! csrf_field() !!}
                                 <button class="btn btn-sm btn-info">Cập nhật</button>
                             </td>
                         </tr>
@@ -37,13 +41,15 @@
                     <td colspan="2"></td>
                     <td>Tổng tiền:</td>
                     <td><span style="font-weight: bold; color: red; font-size: 16px;">{{ Cart::subtotal() }}</span></td>
-                    <td><a href="/order.php" class="btn btn-sm btn-primary">Gửi đơn hàng</a></td>
+                    <td><a href="{{ route('order') }}" class="btn btn-sm btn-primary">Gửi đơn hàng</a></td>
                 </tr>
             </tbody>
         </table>
-
-        <a href="/" class="pull-right" style="margin: 0 20px 20px 0;">Quay lại trang chủ</a>
+    @else
+        <a href="/" class="pull-left btn btn-sm btn-default" style="margin: 20px; padding: 10px;">Quay lại trang chủ</a>
         <div class="clearfix"></div>
+    @endif
+
 
 </div>
 

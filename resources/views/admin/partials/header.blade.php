@@ -34,7 +34,7 @@
                         <li><a href="{{ route('admin.setting.index') }}">Setting</a></li>
                         <li><a href="{{ route('admin.category.index') }}">Category</a></li>
                         <li><a href="{{ route('admin.product.index') }}"><i class="fa fa-cubes"></i> Products</a></li>
-                        <li><a href=""><i class="fa fa-database"></i> Orders</a></li>
+                        <li><a href="{{ route('admin.order.index') }}"><i class="fa fa-database"></i> Orders</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-md-10">
